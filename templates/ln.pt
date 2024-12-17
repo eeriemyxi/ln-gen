@@ -1,0 +1,7 @@
+<html>
+  <head>
+    <meta http-equiv="Refresh" content="${DELAY_SEC}; url='${URL}'" />
+  </head>
+  <body style="background-color: ${BG_COLOR}; margin: 0; padding: 0;">
+  </body>
+</html>

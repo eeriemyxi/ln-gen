@@ -1,0 +1,22 @@
+version = 1
+requires-python = ">=3.10"
+
+[[package]]
+name = "chameleon"
+version = "4.5.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/00/d0/c686d98510ce9ed5764284c119ec16959c67ac295928673f970df0dc4d4a/Chameleon-4.5.4.tar.gz", hash = "sha256:42f646e1208e8cdcc106182b246adf11900e89cbe4440ba334d28c4087bb02f1", size = 180464 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c3/93/81bdaab379a5908876a1029e73fa85e2d90fe04cbc1c2200b3179bc19a75/Chameleon-4.5.4-py3-none-any.whl", hash = "sha256:efca0e1c796ec8f0fa011d90940d48a8f935e23757d6fa95c1c032f235a73f13", size = 88207 },
+]
+
+[[package]]
+name = "ln-gen"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "chameleon" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "chameleon", specifier = ">=4.5.4" }]

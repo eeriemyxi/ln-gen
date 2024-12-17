@@ -1,0 +1,2 @@
+blog my-amazing-blog.com/
+{runpy{scripts/gh-repos.py}}

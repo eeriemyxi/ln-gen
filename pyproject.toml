@@ -1,0 +1,9 @@
+[project]
+name = "ln-gen"
+version = "0.1.0"
+description = "Automatically generate HTML redirect files for specified links."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "chameleon>=4.5.4",
+]
