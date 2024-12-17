@@ -51,6 +51,7 @@ def main():
     parser.add_argument(
         "--link-dir",
         help="Set the directory at where it will create the link HTML files.",
+        type=pathlib.Path,
         default=LINK_DIR,
     )
     parser.add_argument(
