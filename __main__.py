@@ -79,7 +79,7 @@ def main():
     DELAY_SEC = args.delay_sec
 
     print("[INFO]", "Removing", LINK_DIR)
-    shutil.rmtree(LINK_DIR)
+    shutil.rmtree(LINK_DIR, ignore_errors=True)
     print("[INFO]", "Creating", LINK_DIR)
     LINK_DIR.mkdir()
 
