@@ -4,8 +4,12 @@ import re
 import runpy
 import shutil
 import sys
+import kisesi
 
 from chameleon import PageTemplate
+
+kisesi.basic_config(level=kisesi.DEBUG)
+log = kisesi.get_logger(__name__)
 
 SCRIPT_DIR = pathlib.Path(__file__).parent
 LINK_DIR = SCRIPT_DIR / "ln"
@@ -25,22 +29,16 @@ def parse_links(text):
             continue
 
         runpy_path = pathlib.Path(runpymatch["path"]).resolve()
-        print("[INFO]", "Running", runpy_path, file=sys.stderr)
+        log.info("Running '%s'", runpy_path)
         runpymatch_globals = runpy.run_path(runpy_path)
 
         if "LNGENLINKS" not in runpymatch_globals:
-            print(
-                "[ERROR]",
-                "Ran",
-                runpy_path,
-                "but couldn't find 'LNGENLINKS' in globals",
-                file=sys.stderr,
-            )
+            log.error("Ran '%s' but couldn't find 'LNGENLINKS' in globals", runpy_path)
             exit(1)
 
         links |= dict(runpymatch_globals["LNGENLINKS"])
 
-    print("[INFO]", "Parsing links complete", file=sys.stderr)
+    log.info("Parsing links complete")
     return links
 
 
@@ -78,9 +76,9 @@ def main():
     BG_COLOR = args.bg_color
     DELAY_SEC = args.delay_sec
 
-    print("[INFO]", "Removing", LINK_DIR)
+    log.info("Removing '%s'", LINK_DIR)
     shutil.rmtree(LINK_DIR, ignore_errors=True)
-    print("[INFO]", "Creating", LINK_DIR)
+    log.info("Creating '%s'", LINK_DIR)
     LINK_DIR.mkdir()
 
     with open(SCRIPT_DIR / "templates" / "ln.pt") as lnhtml:
@@ -93,7 +91,7 @@ def main():
         filename = (LINK_DIR / name).with_suffix(".html")
         with open(filename, "w") as file:
             file.write(ln_template(DELAY_SEC=DELAY_SEC, URL=link, BG_COLOR=BG_COLOR))
-            print("[INFO]", f"[{name}] -> {filename} @ [{link}]", file=sys.stderr)
+            log.info(f"[{name}] -> {filename} @ [{link}]")
 
 
 if __name__ == "__main__":
